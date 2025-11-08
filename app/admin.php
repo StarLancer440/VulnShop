@@ -44,7 +44,7 @@ if ($result) {
     <div class="header">
         <h1>🛒 VulnShop - Admin Panel</h1>
     </div>
-    
+
     <div class="nav">
         <a href="index.php">Home</a>
         <a href="login.php">Login</a>
@@ -53,7 +53,7 @@ if ($result) {
         <a href="upload.php">Upload</a>
         <a href="admin.php">Admin</a>
     </div>
-    
+
     <div class="content">
         <?php if (!$is_admin): ?>
             <div class="warning">

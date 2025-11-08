@@ -14,7 +14,7 @@ This document contains hints for discovering vulnerabilities in the VulnShop tra
 **Hints**:
 - The login form doesn't properly sanitize user inputs
 - Try entering SQL syntax in username/password fields
-- Classic payload: `' OR '1'='1` 
+- Classic payload: `' OR '1'='1`
 - Advanced: Try UNION-based injection in search
 - Profile page has IDOR + SQL injection in the `id` parameter
 

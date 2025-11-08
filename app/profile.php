@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['bio'])) {
     <div class="header">
         <h1>🛒 VulnShop</h1>
     </div>
-    
+
     <div class="nav">
         <a href="index.php">Home</a>
         <a href="login.php">Login</a>
@@ -54,10 +54,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['bio'])) {
         <a href="upload.php">Upload</a>
         <a href="admin.php">Admin</a>
     </div>
-    
+
     <div class="content">
         <h2>User Profile</h2>
-        
+
         <?php if ($user): ?>
             <div class="profile-info">
                 <p><strong>Username:</strong> <?php echo $user['username']; ?></p>
@@ -65,13 +65,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['bio'])) {
                 <p><strong>Role:</strong> <?php echo $user['role']; ?></p>
                 <p><strong>User ID:</strong> <?php echo $user['id']; ?></p>
             </div>
-            
+
             <h3>Bio</h3>
             <!-- Stored XSS vulnerability - unescaped output -->
             <div style="border: 1px solid #ddd; padding: 10px; min-height: 50px;">
                 <?php echo $user['bio'] ? $user['bio'] : 'No bio yet.'; ?>
             </div>
-            
+
             <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] == $user_id): ?>
                 <h3>Update Bio</h3>
                 <form method="POST">
@@ -79,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['bio'])) {
                     <button type="submit">Update Bio</button>
                 </form>
             <?php endif; ?>
-            
+
         <?php else: ?>
             <p>User not found.</p>
         <?php endif; ?>

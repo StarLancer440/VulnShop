@@ -5,15 +5,15 @@ $message = '';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['file'])) {
     $target_dir = "uploads/";
-    
+
     // Create uploads directory if it doesn't exist
     if (!file_exists($target_dir)) {
         mkdir($target_dir, 0777, true);
     }
-    
+
     // Unrestricted file upload vulnerability - no validation
     $target_file = $target_dir . basename($_FILES["file"]["name"]);
-    
+
     if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
         $message = "File uploaded successfully: <a href='$target_file'>" . htmlspecialchars(basename($_FILES["file"]["name"])) . "</a>";
     } else {
@@ -47,7 +47,7 @@ if (file_exists("uploads/")) {
     <div class="header">
         <h1>🛒 VulnShop</h1>
     </div>
-    
+
     <div class="nav">
         <a href="index.php">Home</a>
         <a href="login.php">Login</a>
@@ -56,19 +56,19 @@ if (file_exists("uploads/")) {
         <a href="upload.php">Upload</a>
         <a href="admin.php">Admin</a>
     </div>
-    
+
     <div class="content">
         <h2>File Upload</h2>
-        
+
         <?php if ($message): ?>
             <div class="message"><?php echo $message; ?></div>
         <?php endif; ?>
-        
+
         <form method="POST" enctype="multipart/form-data">
             <input type="file" name="file" required>
             <button type="submit">Upload File</button>
         </form>
-        
+
         <div class="file-list">
             <h3>Uploaded Files</h3>
             <?php if (count($files) > 0): ?>

@@ -22,7 +22,7 @@ session_start();
         <h1>🛒 VulnShop - Cybersecurity Training Lab</h1>
         <p>A deliberately vulnerable web application for penetration testing practice</p>
     </div>
-    
+
     <div class="nav">
         <a href="index.php">Home</a>
         <a href="login.php">Login</a>
@@ -31,12 +31,12 @@ session_start();
         <a href="upload.php">Upload</a>
         <a href="admin.php">Admin</a>
     </div>
-    
+
     <div class="content">
         <h2>Welcome to VulnShop</h2>
         <p>This is a training environment containing multiple web vulnerabilities.</p>
         <p><strong>⚠️ WARNING:</strong> This application is intentionally vulnerable. Never deploy this on a public network!</p>
-        
+
         <h3>Available Features:</h3>
         <ul>
             <li>User Authentication</li>
@@ -45,11 +45,11 @@ session_start();
             <li>File Upload</li>
             <li>Admin Panel</li>
         </ul>
-        
+
         <h3>Getting Started:</h3>
         <p>Try logging in with username: <code>admin</code> and explore the application!</p>
     </div>
-    
+
     <div class="footer">
         <!-- Debug info: <?php echo $_SERVER['REMOTE_ADDR']; ?> -->
         VulnShop v1.0 | For educational purposes only

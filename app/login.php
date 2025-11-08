@@ -8,18 +8,18 @@ $error = '';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
-    
+
     try {
         // SQL Injection vulnerability - no input sanitization
         $conn = new mysqli(getenv('MYSQL_HOST'), getenv('MYSQL_USER'), getenv('MYSQL_PASSWORD'), getenv('MYSQL_DATABASE'));
-        
+
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
-        
+
         $query = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
         $result = $conn->query($query);
-        
+
         if ($result && $result->num_rows > 0) {
             $user = $result->fetch_assoc();
             $_SESSION['user_id'] = $user['id'];
@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="header">
         <h1>🛒 VulnShop</h1>
     </div>
-    
+
     <div class="nav">
         <a href="index.php">Home</a>
         <a href="login.php">Login</a>
@@ -64,24 +64,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <a href="upload.php">Upload</a>
         <a href="admin.php">Admin</a>
     </div>
-    
+
     <div class="content">
         <h2>Login</h2>
         <?php if ($error): ?>
             <div class="error"><?php echo $error; ?></div>
         <?php endif; ?>
-        
+
         <form method="POST">
             <label>Username:</label>
             <input type="text" name="username" required>
-            
+
             <label>Password:</label>
             <input type="password" name="password" required>
-            
+
             <br><br>
             <button type="submit">Login</button>
         </form>
-        
+
         <p style="margin-top: 20px; font-size: 12px; color: #666;">
             Hint: Try some default credentials!
         </p>

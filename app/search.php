@@ -6,13 +6,13 @@ $search = '';
 
 if (isset($_GET['q'])) {
     $search = $_GET['q'];
-    
+
     $conn = new mysqli(getenv('MYSQL_HOST'), getenv('MYSQL_USER'), getenv('MYSQL_PASSWORD'), getenv('MYSQL_DATABASE'));
-    
+
     // SQL Injection in search - no sanitization
     $query = "SELECT * FROM products WHERE name LIKE '%$search%' OR description LIKE '%$search%'";
     $result = $conn->query($query);
-    
+
     if ($result) {
         while ($row = $result->fetch_assoc()) {
             $results[] = $row;
@@ -39,7 +39,7 @@ if (isset($_GET['q'])) {
     <div class="header">
         <h1>🛒 VulnShop</h1>
     </div>
-    
+
     <div class="nav">
         <a href="index.php">Home</a>
         <a href="login.php">Login</a>
@@ -48,18 +48,18 @@ if (isset($_GET['q'])) {
         <a href="upload.php">Upload</a>
         <a href="admin.php">Admin</a>
     </div>
-    
+
     <div class="content">
         <h2>Search Products</h2>
         <form method="GET">
             <input type="text" name="q" value="<?php echo htmlspecialchars($search); ?>" placeholder="Search for products...">
             <button type="submit">Search</button>
         </form>
-        
+
         <?php if ($search): ?>
             <h3>Results for: "<?php echo $search; ?>"</h3>
             <!-- XSS vulnerability - unescaped output -->
-            
+
             <?php if (count($results) > 0): ?>
                 <?php foreach ($results as $product): ?>
                     <div class="product">

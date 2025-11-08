@@ -34,41 +34,22 @@ VulnShop is designed to help cybersecurity students and professionals practice i
 - Docker
 - Docker Compose
 
-### Installation
+### Installation & Running
 
-1. **Create the project directory structure:**
+1. **Extract the zip file:**
 ```bash
-mkdir vulnshop
+unzip vulnshop.zip
 cd vulnshop
-mkdir app db_init
 ```
 
-2. **Create all the required files:**
-
-Save the following files in their respective locations:
-- `docker-compose.yml` (root directory)
-- `Dockerfile` (root directory)
-- `nginx.conf` (root directory)
-- `default.conf` (root directory)
-- `app/index.php`
-- `app/login.php`
-- `app/search.php`
-- `app/profile.php`
-- `app/upload.php`
-- `app/admin.php`
-- `app/config.php.bak`
-- `db_init/init.sql`
-- `README.md` (root directory)
-- `HINTS.md` (root directory)
-
-3. **Start the application:**
+2. **Start the application:**
 ```bash
 docker-compose up -d
 ```
 
-4. **Wait for services to initialize** (about 30 seconds for MySQL)
+3. **Wait for services to initialize** (about 30 seconds for MySQL)
 
-5. **Access the application:**
+4. **Access the application:**
 ```
 http://localhost:8080
 ```
@@ -82,31 +63,6 @@ docker-compose down
 ```bash
 docker-compose down -v
 rm -rf app/uploads/*
-```
-
----
-
-## 📋 Directory Structure
-
-```
-vulnshop/
-├── docker-compose.yml
-├── Dockerfile
-├── nginx.conf
-├── default.conf
-├── README.md
-├── HINTS.md
-├── app/
-│   ├── index.php
-│   ├── login.php
-│   ├── search.php
-│   ├── profile.php
-│   ├── upload.php
-│   ├── admin.php
-│   ├── config.php.bak
-│   └── uploads/
-└── db_init/
-    └── init.sql
 ```
 
 ---
@@ -240,12 +196,6 @@ After completing this lab, you should be able to:
 ## 📝 License
 
 This project is for educational purposes only. Use responsibly and ethically.
-
----
-
-## 🤝 Contributing
-
-This is a training resource. If you find it useful or have suggestions for additional vulnerabilities to include, feel free to extend it for your own training purposes.
 
 ---
 

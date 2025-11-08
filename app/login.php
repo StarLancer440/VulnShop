@@ -1,5 +1,7 @@
 <?php
 session_start();
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 $error = '';
 
@@ -7,21 +9,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
     
-    // SQL Injection vulnerability - no input sanitization
-    $conn = new mysqli(getenv('MYSQL_HOST'), getenv('MYSQL_USER'), getenv('MYSQL_PASSWORD'), getenv('MYSQL_DATABASE'));
-    
-    $query = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
-    $result = $conn->query($query);
-    
-    if ($result && $result->num_rows > 0) {
-        $user = $result->fetch_assoc();
-        $_SESSION['user_id'] = $user['id'];
-        $_SESSION['username'] = $user['username'];
-        $_SESSION['role'] = $user['role'];
-        header('Location: profile.php');
-        exit();
-    } else {
-        $error = 'Invalid credentials';
+    try {
+        // SQL Injection vulnerability - no input sanitization
+        $conn = new mysqli(getenv('MYSQL_HOST'), getenv('MYSQL_USER'), getenv('MYSQL_PASSWORD'), getenv('MYSQL_DATABASE'));
+        
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+        
+        $query = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
+        $result = $conn->query($query);
+        
+        if ($result && $result->num_rows > 0) {
+            $user = $result->fetch_assoc();
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['username'] = $user['username'];
+            $_SESSION['role'] = $user['role'];
+            header('Location: profile.php');
+            exit();
+        } else {
+            $error = 'Invalid credentials';
+        }
+        $conn->close();
+    } catch (Exception $e) {
+        $error = 'Database error: ' . $e->getMessage();
     }
 }
 ?>

@@ -13,7 +13,8 @@ services:
       - MYSQL_PASSWORD=weak_password123
       - MYSQL_DATABASE=vulnerable_db
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     networks:
       - vuln_network
 
@@ -26,6 +27,10 @@ services:
       - MYSQL_PASSWORD=weak_password123
     volumes:
       - ./db_init:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
     networks:
       - vuln_network
 

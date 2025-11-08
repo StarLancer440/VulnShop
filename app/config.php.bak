@@ -1,0 +1,25 @@
+<?php
+// Backup configuration file (Information Disclosure vulnerability)
+
+// Database credentials exposed in backup file
+define('DB_HOST', 'db');
+define('DB_USER', 'webapp');
+define('DB_PASS', 'weak_password123');
+define('DB_NAME', 'vulnerable_db');
+
+// Secret API keys (exposed)
+define('API_KEY', 'sk_live_51HabcdefghijklmnopqrstuvwxyzABCDEFG');
+define('SECRET_TOKEN', 'super_secret_token_12345');
+
+// Admin backdoor credentials
+define('BACKDOOR_USER', 'superadmin');
+define('BACKDOOR_PASS', 'backdoor999');
+
+// Debug mode enabled
+define('DEBUG', true);
+define('DISPLAY_ERRORS', true);
+
+// Session configuration (weak)
+ini_set('session.cookie_httponly', 0);
+ini_set('session.cookie_secure', 0);
+?>

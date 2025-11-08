@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "8080:80"
+    volumes:
+      - ./app:/var/www/html
+    environment:
+      - MYSQL_HOST=db
+      - MYSQL_USER=webapp
+      - MYSQL_PASSWORD=weak_password123
+      - MYSQL_DATABASE=vulnerable_db
+    depends_on:
+      - db
+    networks:
+      - vuln_network
+
+  db:
+    image: mysql:8.0
+    environment:
+      - MYSQL_ROOT_PASSWORD=root123
+      - MYSQL_DATABASE=vulnerable_db
+      - MYSQL_USER=webapp
+      - MYSQL_PASSWORD=weak_password123
+    volumes:
+      - ./db_init:/docker-entrypoint-initdb.d
+    networks:
+      - vuln_network
+
+networks:
+  vuln_network:
+    driver: bridge
